@@ -1,0 +1,24 @@
+* {
+    margin: 0;
+    padding: 0;
+    position: relative;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+    font-size: 20px;
+    font-family: "Single Day", sans-serif;
+    color: white;
+}
+
+body {
+    background-color: rgb(56, 9, 9);
+}
+
+section {
+    width: 100%;
+    height: 100dvh;
+    max-width: 1920px;
+}
+
+#content_Container {
+    background-color: blue;
+}
