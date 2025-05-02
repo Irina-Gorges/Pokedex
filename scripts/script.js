@@ -14,14 +14,7 @@ function renderHtml(poke) {
     contentRef.innerHTML = "";
     const pokeMon = getFromLocalStorage();
     for (i = 0; i < pokeMon.length; i++) {
-        contentRef.innerHTML +=
-            `<img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/shiny/` +
-            pokeMon[i].id +
-            `.gif">` +
-            pokeMon[i].name +
-            ` ` +
-            pokeMon[i].url +
-            `<br>`;
+        contentRef.innerHTML += getRenderHtmlTemplate(pokeMon[i].id, pokeMon[i].name);
     }
 }
 
