@@ -44,9 +44,9 @@ main {
             height: auto;
             width: 100%;
             display: flex;
-            justify-content: space-evenly;
+            justify-content: space-around;
             flex-wrap: wrap;
-            gap: 6rem;
+            gap: 7rem;
             background-color: rgb(21, 3, 71);
             margin-bottom: 30px;
         }
@@ -54,71 +54,68 @@ main {
 }
 
 .poke_Container {
-    display: flex;
-    flex-direction: column-reverse;
-    justify-content: flex-end;
     align-items: center;
-    width: 200px;
-    height: 250px;
+    width: 180px;
+    height: 220px;
     border-radius: 20px;
     background-color: rgb(43, 39, 87);
     cursor: pointer;
 
     .fairy {
-        width: 200px;
-        height: 180px;
+        width: 180px;
+        height: 160px;
         background-color: #6f03d4;
     }
 
     .ground {
-        width: 200px;
-        height: 180px;
+        width: 180px;
+        height: 160px;
         background-color: rgb(82, 43, 43);
     }
 
     .electric {
-        width: 200px;
-        height: 180px;
+        width: 180px;
+        height: 160px;
         background-color: #123bee;
     }
 
     .poison {
-        width: 200px;
-        height: 180px;
+        width: 180px;
+        height: 160px;
         background-color: #711a7a;
     }
 
     .bug {
-        width: 200px;
-        height: 180px;
+        width: 180px;
+        height: 160px;
         background-color: #4b4b4b;
     }
 
     .normal {
-        width: 200px;
-        height: 180px;
+        width: 180px;
+        height: 160px;
         background-color: #d1ce07;
     }
 
     .fire {
-        width: 200px;
-        height: 180px;
+        width: 180px;
+        height: 160px;
         background-color: #e06812;
     }
     .water {
-        width: 200px;
-        height: 180px;
+        width: 180px;
+        height: 160px;
         background-color: #45a5ff;
     }
     .grass {
-        width: 200px;
-        height: 180px;
+        width: 180px;
+        height: 160px;
         background-color: #78c850;
     }
 
     .photo {
-        width: 200px;
-        height: 180px;
+        width: 180px;
+        height: 160px;
         border-top-left-radius: 20px;
         border-top-right-radius: 20px;
         filter: drop-shadow(0px 4px 8px rgba(0, 0, 0, 0.363));
@@ -136,22 +133,45 @@ main {
         font-size: 17px;
     }
 
-    .load-more-button {
-        margin-top: 30px;
-        padding: 10px 20px;
-        font-size: 16px;
-        display: block;
-        background-color: #e0e0e0;
-        color: rgb(0, 0, 0);
-        border: none;
-        border-radius: 8px;
+    #photo_Type {
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        top: 5px;
         cursor: pointer;
-        transition: background-color 0.3s ease;
-    }
 
-    .load-more-button:hover {
-        background-color: #0056b3;
+        img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+        }
     }
+}
+
+#load-more-wrapper {
+    position: relative;
+    text-align: center;
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.load-more-button {
+    margin-top: 30px;
+    padding: 10px 20px;
+    font-size: 16px;
+    _display: block;
+    background-color: #e0e0e0;
+    color: rgb(0, 0, 0);
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.load-more-button:hover {
+    background-color: #0056b3;
 }
 
 .poke_Container:hover {
@@ -159,16 +179,14 @@ main {
 }
 
 footer {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    position: fixed;
+    bottom: 0;
     width: 100%;
-    height: 120px;
+    height: 100px;
     background-color: rgb(42, 25, 90);
 
     img {
-        width: 200px;
+        width: 180px;
         margin-bottom: 12px;
     }
 
@@ -182,4 +200,8 @@ footer {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+}
+
+.d_none {
+    display: none;
 }
