@@ -1,17 +1,52 @@
-function getRenderHtmlTemplate(id, name, type, stats) {
-    return `<div id="${id}" class="poke_Container">
+function getRenderHtmlTemplate(id, name, type) {
+    return `<div onclick="toggleOverlay(${id})" id="${id}" class="poke_Container">
         <img class="${
             type[0].type.name
         } photo" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/${id}.png">
-        <div class="name_Info">#${id} &nbsp; ${name}&nbsp; ${stats}</div>
+        <div class="name_Info">#${id} &nbsp; ${name}&nbsp;</div>
         <div id="photo_Type">${getRenderTypeTemplate(type)}</div> 
         </div>`;
 }
 
 function getRenderTypeTemplate(type) {
     if (type.length == 2) {
-        return `<img src="img/${type[0].type.name}.webp" alt=""><img src="img/${type[1].type.name}.webp" alt=""></img>`;
+        return `<img src="img/${type[0].type.name}.webp"><img src="img/${type[1].type.name}.webp">`;
     } else {
-        return `<img src="img/${type[0].type.name}.webp" alt="">`;
+        return `<img src="img/${type[0].type.name}.webp"`;
     }
+}
+
+function getRenderStatsTemplate(stats) {
+    let result = "";
+    for (i = 0; i < stats.length; i++) {
+        result += `<div>Name: ${stats[i].stat.name} wert: ${stats[i].base_stat}</div>`;
+    }
+    return result;
+}
+
+function toggleOverlayTemplate(id, name, menge, i) {
+    return `<div onclick="bubblingprotection(event)" id="dialog">
+                <div id="photo-title">${name}</div>
+                <img
+                    onclick="toggleClose()"
+                    src="./img/x-circle-regular-24.png"
+                    alt="x-icon"
+                    class="close"
+                    class="flex_Container"
+                />
+                <img id="dialog-img" src='https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/${id}.png' />
+                <div id="navi_dialog"><img
+                    onclick="back(${i})"
+                    id="backbutton"
+                    src="./img/chevron-left-solid-60.png"
+                    alt=""
+                />
+                <div id="position">${i + 1}/${menge}</div>
+                <img
+                    onclick="forward(${i})"
+                    id="forwardbutton"
+                    src="./img/chevron-right-regular-60.png"
+                    alt=""
+                /></div>
+            </div>`;
 }

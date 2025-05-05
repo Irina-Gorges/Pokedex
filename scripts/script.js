@@ -53,7 +53,6 @@ async function renderHtml() {
     renderLoadMoreButton();
 }
 
-
 function renderNextPokemons() {
     const contentRef = document.getElementById("content");
     const end = Math.min(displayedCount + PAGE_SIZE, allPokemon.length);
@@ -62,7 +61,8 @@ function renderNextPokemons() {
         contentRef.innerHTML += getRenderHtmlTemplate(
             allPokemon[i].id,
             allPokemon[i].name,
-            allPokemon[i].type
+            allPokemon[i].type,
+            allPokemon[i].stats
         );
     }
 
@@ -105,4 +105,74 @@ function renderLoadMoreButton() {
     }
 }
 
+function toggleClose() {
+    let overlayRef = document.getElementById("overlay");
+    overlayRef.classList.toggle("d_none");
+}
 
+function bubblingprotection(event) {
+    event.stopPropagation();
+}
+
+function back(i) {
+    // Wenn der Zaehler 0 ist soll wieder von hinten angefangen werden
+
+    if (i == 0) {
+        i = allPokemon.length - 1;
+        updateDialog(i);
+    } else {
+        // Wenn nicht erstes Bild dann ein Bild zurück
+        i--;
+        updateDialog(i);
+    }
+    document.getElementById("backbutton").onclick = function () {
+        back(i);
+    };
+    document.getElementById("forwardbutton").onclick = function () {
+        forward(i);
+    };
+}
+
+function forward(i) {
+    // Wenn der Zaehler das Maxmimum erreicht hat soll wieder von vorne angefangen werden
+    if (i == allPokemon.length - 1) {
+        i = 0;
+        updateDialog(i);
+    } else {
+        // Wenn nicht letztes Bild dann nächstes anzeigen
+        i++;
+        updateDialog(i);
+    }
+
+    document.getElementById("forwardbutton").onclick = function () {
+        forward(i);
+    };
+    document.getElementById("backbutton").onclick = function () {
+        back(i);
+    };
+}
+
+function updateDialog(ind) {
+    let allPokemon = getFromLocalStorage();
+    document.getElementById("dialog-img").src =
+        "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/" +
+        allPokemon[ind].id +
+        ".png";
+    document.getElementById("photo-title").innerHTML = allPokemon[ind].name;
+    document.getElementById("position").innerHTML = "";
+    document.getElementById("position").innerHTML =
+        ind + 1 + "/" + allPokemon.length;
+}
+
+function toggleOverlay(id) {
+    let overlayRef = document.getElementById("overlay");
+    let allPokemon = getFromLocalStorage();
+    overlayRef.innerHTML = "";
+    overlayRef.innerHTML = toggleOverlayTemplate(
+        id,
+        allPokemon[id - 1].name,
+        allPokemon.length,
+        id - 1
+    );
+    toggleClose();
+}
