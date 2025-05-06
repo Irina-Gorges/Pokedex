@@ -139,7 +139,6 @@ function updateDialog(ind) {
         "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/" +
         allPokemon[ind].id +
         ".png";
-    document.getElementById("ID").innerHTML = allPokemon[ind].id;
     document.getElementById("photo-title").innerHTML = allPokemon[ind].name;
     document.getElementById("position").innerHTML = "";
     document.getElementById("position").innerHTML =
