@@ -1,4 +1,4 @@
-let allPokemon = [];
+// let allPokemon = [];
 let displayedCount = 0;
 const PAGE_SIZE = 20;
 
@@ -25,29 +25,10 @@ async function renderHtml() {
         const poke = await fetchDataJson(
             "https://pokeapi.co/api/v2/pokemon?limit=40&offset=0"
         );
-
-        for (let i = 0; i < poke.results.length; i++) {
-            const res = await fetch(poke.results[i].url);
-            const data = await res.json();
-
-            allPokemon.push({
-                id: data.id,
-                name: data.name,
-                type: data.types,
-                url: data.forms[0].url,
-                stats: data.stats,
-                height: data.height,
-                weight: data.weight,
-                base_experience: data.base_experience,
-                abilities: data.abilities,
-            });
-        }
-
-        saveToLocalStorage(allPokemon);
+        getPokeResults();
     } else {
         allPokemon = getFromLocalStorage();
     }
-
     displayedCount = 0;
     renderNextPokemons();
     renderLoadMoreButton();
@@ -158,6 +139,7 @@ function updateDialog(ind) {
         "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/" +
         allPokemon[ind].id +
         ".png";
+    document.getElementById("ID").innerHTML = allPokemon[ind].id;
     document.getElementById("photo-title").innerHTML = allPokemon[ind].name;
     document.getElementById("position").innerHTML = "";
     document.getElementById("position").innerHTML =
@@ -175,4 +157,24 @@ function toggleOverlay(id) {
         id - 1
     );
     toggleClose();
+}
+
+async function getPokeResults() {
+    let result = [];
+    for (let i = 0; i < poke.results.length; i++) {
+        const res = await fetch(poke.results[i].url);
+        const data = await res.json();
+        result.push({
+            id: data.id,
+            name: data.name,
+            type: data.types,
+            url: data.forms[0].url,
+            stats: data.stats,
+            height: data.height,
+            weight: data.weight,
+            base_experience: data.base_experience,
+            abilities: data.abilities,
+        });
+    }
+    saveToLocalStorage(result);
 }

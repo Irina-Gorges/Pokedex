@@ -10,7 +10,7 @@ function getRenderHtmlTemplate(id, name, type) {
 
 function getRenderTypeTemplate(type) {
     if (type.length == 2) {
-        return `<img src="img/${type[0].type.name}.webp"><img src="img/${type[1].type.name}.webp">`;
+        return `<img src="img/${type[0].type.name}.webp" alt"${type[0].type.name}"><img src="img/${type[1].type.name}.webp" alt"${type[0].type.name}">`;
     } else {
         return `<img src="img/${type[0].type.name}.webp"`;
     }
@@ -25,8 +25,8 @@ function getRenderStatsTemplate(stats) {
 }
 
 function toggleOverlayTemplate(id, name, menge, i) {
-    return `<div onclick="bubblingprotection(event)" id="dialog">
-                <div id="photo-title">${name}</div>
+    return `<div onclick="bubblingprotection(event)" id="dialog" class="dialog_Container flex_Container">
+                <div id="photo-title">#${id} &nbsp;&nbsp; ${name}</div>
                 <img
                     onclick="toggleClose()"
                     src="./img/x-circle-regular-24.png"
