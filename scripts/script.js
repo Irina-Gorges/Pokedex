@@ -123,11 +123,14 @@ function updateDialog(i) {
     overlayRef.innerHTML = "";
     overlayRef.innerHTML = toggleOverlayTemplate(
         getFromLocalStorage()[i].id,
-        getFromLocalStorage()[id - 1].type,
+        getFromLocalStorage()[i - 1].type,
         getFromLocalStorage()[i].name,
         getFromLocalStorage().length,
-        i
+        i,
+        getFromLocalStorage()[i].stats,
+        getFromLocalStorage()[i]
     );
+    renderInfoPokeTemplate(i);
 }
 
 function toggleOverlay(id) {
@@ -138,8 +141,11 @@ function toggleOverlay(id) {
         getFromLocalStorage()[id - 1].type,
         getFromLocalStorage()[id - 1].name,
         getFromLocalStorage().length,
-        id - 1
+        id - 1,
+        getFromLocalStorage()[id].stats,
+        getFromLocalStorage()[id]
     );
+    renderInfoPokeTemplate(id - 1);
     toggleClose();
 }
 

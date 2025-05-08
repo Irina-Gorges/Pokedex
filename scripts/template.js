@@ -12,19 +12,19 @@ function getRenderTypeTemplate(type) {
     if (type.length == 2) {
         return `<img src="img/${type[0].type.name}.webp" alt"${type[0].type.name}"><img src="img/${type[1].type.name}.webp" alt"${type[0].type.name}">`;
     } else {
-        return `<img src="img/${type[0].type.name}.webp"`;
+        return `<img src="img/${type[0].type.name}.webp" alt"${type[0].type.name}">`;
     }
 }
 
 function getRenderStatsTemplate(stats) {
     let result = "";
     for (i = 0; i < stats.length; i++) {
-        result += `<div>Name: ${stats[i].stat.name} wert: ${stats[i].base_stat}</div>`;
+        result += `<p>${stats[i].stat.name} ${stats[i].base_stat}</p>`;
     }
     return result;
 }
 
-function toggleOverlayTemplate(id, type, name, menge, i) {
+function toggleOverlayTemplate(id, type, name, menge, i, stats, pokeeinzel) {
     return `<div onclick="bubblingprotection(event)" id="dialog" class="dialog_Container flex_Container">
                 <div id="photo-title">#${id} &nbsp;&nbsp; ${name}</div>
                 <img
@@ -38,11 +38,11 @@ function toggleOverlayTemplate(id, type, name, menge, i) {
                     type[0].type.name
                 } photo_big"><img id="dialog-img" class="img_Dialog"src='https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/${id}.png' /></div>
                 <div class="type">${getRenderTypeTemplate(type)}</div>
-                <div id="more_Details" class="details"><nav>
-                    <a href="">Info</a>
-                    <a href="">Stats</a>
-                    <a href="">Evo Chain</a>
-                </nav></div>
+                <div id="more_Details" class="details">
+                    <button onclick="renderInfoPokeTemplate(${i})">Info</button>
+                    <button onclick="rendSpecialInfo(${i})">Stats</button>
+                    <button onclick="">Evo Chain</button></div>
+                <div id="specialInfo"></div>
                 <div id="navi_dialog"><img
                     onclick="back(${i})"
                     id="backbutton"
@@ -57,4 +57,30 @@ function toggleOverlayTemplate(id, type, name, menge, i) {
                     alt=""
                 /></div>
             </div>`;
+}
+
+function renderInfoPokeTemplate(i) {
+    let myArr = getFromLocalStorage();
+    let specialInfoRef = document.getElementById("specialInfo");
+    specialInfoRef.innerHTML = "";
+    specialInfoRef.innerHTML = `<div><p>${myArr[i].height}</p>
+            <p>${myArr[i].weight}</p>
+            <p>${myArr[i].base_experience}</p>
+            ${getRenderAbilitiesTemplate(myArr[i].abilities)}
+            </div>`;
+}
+
+function getRenderAbilitiesTemplate(abilities) {
+    let result = "";
+    for (i = 0; i < abilities.length; i++) {
+        result += `<span>${abilities[i].ability.name} </span>`;
+    }
+    return result;
+}
+
+function rendSpecialInfo(i) {
+    let myArr = getFromLocalStorage();
+    let specialInfoRef = document.getElementById("specialInfo");
+    specialInfoRef.innerHTML = "";
+    specialInfoRef.innerHTML = getRenderStatsTemplate(myArr[i].stats);
 }
