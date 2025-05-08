@@ -37,7 +37,7 @@ header {
 }
 
 main {
-    padding: 0 160px;
+    padding: 0 120px;
 
     section {
         top: 80px;
@@ -60,8 +60,8 @@ main {
 
 .poke_Container {
     align-items: center;
-    width: 180px;
-    height: 220px;
+    width: 200px;
+    height: 250px;
     border-radius: 20px;
     background-color: rgb(76, 126, 122);
     cursor: pointer;
@@ -119,8 +119,8 @@ main {
     }
 
     .photo {
-        width: 180px;
-        height: 160px;
+        width: 200px;
+        height: 180px;
         border-top-left-radius: 20px;
         border-top-right-radius: 20px;
         filter: drop-shadow(2px 3px 4px #000000);
@@ -143,7 +143,7 @@ main {
         display: flex;
         justify-content: space-evenly;
         align-items: center;
-        top: 5px;
+        top: 12px;
         cursor: pointer;
         filter: drop-shadow(1px 1px 2px #000000);
 
@@ -192,16 +192,15 @@ main {
     width: 100%;
     height: 100dvh;
     background: rgba(0, 0, 0, 0.8);
-    _z-index: 1001;
 
     #dialog {
         width: 500px;
-        height: 600px;
+        height: 700px;
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
         background: rgb(45, 143, 138);
-        padding: 18px;
+        padding: 12px;
         border-radius: 10px;
 
         @media (max-width: 570px) {
@@ -216,20 +215,203 @@ main {
             }
         }
 
-        #dialog-img {
-            position: absolute;
-            width: auto;
-            height: 40%;
-            top: 30px;
-            object-fit: cover;
-            border-radius: 10px;
+        .photo_big {
+            bottom: 145px;
+
+            .img_Dialog {
+                bottom: 10%;
+                left: 20%;
+                width: 280px;
+                height: 240px;
+                object-fit: cover;
+                border-radius: 10px;
+                filter: drop-shadow(2px 3px 4px #000000);
+            }
+        }
+
+        .fairy {
+            width: 500px;
+            height: 250px;
+            background-color: #6f03d4;
+
+            @media (max-width: 570px) {
+                width: 400px;
+
+                @media (max-width: 450px) {
+                    width: 350px;
+
+                    @media (max-width: 380px) {
+                        width: 280px;
+                    }
+                }
+            }
+        }
+
+        .ground {
+            width: 500px;
+            height: 250px;
+            background-color: rgb(82, 43, 43);
+
+            @media (max-width: 570px) {
+                width: 400px;
+
+                @media (max-width: 450px) {
+                    width: 350px;
+
+                    @media (max-width: 380px) {
+                        width: 280px;
+                    }
+                }
+            }
+        }
+
+        .electric {
+            width: 500px;
+            height: 250px;
+            background-color: #123bee;
+
+            @media (max-width: 570px) {
+                width: 400px;
+
+                @media (max-width: 450px) {
+                    width: 350px;
+
+                    @media (max-width: 380px) {
+                        width: 280px;
+                    }
+                }
+            }
+        }
+
+        .poison {
+            width: 500px;
+            height: 250px;
+            background-color: #711a7a;
+
+            @media (max-width: 570px) {
+                width: 400px;
+
+                @media (max-width: 450px) {
+                    width: 350px;
+
+                    @media (max-width: 380px) {
+                        width: 280px;
+                    }
+                }
+            }
+        }
+
+        .bug {
+            width: 500px;
+            height: 250px;
+            background-color: #4b4b4b;
+
+            @media (max-width: 570px) {
+                width: 400px;
+
+                @media (max-width: 450px) {
+                    width: 350px;
+
+                    @media (max-width: 380px) {
+                        width: 280px;
+                    }
+                }
+            }
+        }
+
+        .normal {
+            width: 500px;
+            height: 250px;
+            background-color: #d1ce07;
+
+            @media (max-width: 570px) {
+                width: 400px;
+
+                @media (max-width: 450px) {
+                    width: 350px;
+
+                    @media (max-width: 380px) {
+                        width: 280px;
+                    }
+                }
+            }
+        }
+
+        .fire {
+            width: 500px;
+            height: 250px;
+            background-color: #e06812;
+
+            @media (max-width: 570px) {
+                width: 400px;
+
+                @media (max-width: 450px) {
+                    width: 350px;
+
+                    @media (max-width: 380px) {
+                        width: 280px;
+                    }
+                }
+            }
+        }
+        .water {
+            width: 500px;
+            height: 250px;
+            background-color: #45a5ff;
+
+            @media (max-width: 570px) {
+                width: 400px;
+
+                @media (max-width: 450px) {
+                    width: 350px;
+
+                    @media (max-width: 380px) {
+                        width: 280px;
+                    }
+                }
+            }
+        }
+        .grass {
+            width: 500px;
+            height: 250px;
+            background-color: #78c850;
+
+            @media (max-width: 570px) {
+                width: 400px;
+
+                @media (max-width: 450px) {
+                    width: 350px;
+
+                    @media (max-width: 380px) {
+                        width: 280px;
+                    }
+                }
+            }
+        }
+
+        .type {
+            bottom: 20%;
+
+            img {
+                width: 40px;
+                height: 40px;
+                border-radius: 50%;
+                margin-right: 12px;
+            }
+        }
+
+        .photo {
+            width: 200px;
+            height: 180px;
+            border-top-left-radius: 20px;
+            border-top-right-radius: 20px;
             filter: drop-shadow(2px 3px 4px #000000);
         }
 
         #photo-title {
             position: absolute;
             text-transform: capitalize;
-            top: 20px;
+            top: 15px;
             height: 28px;
             left: 20px;
             font-size: 18px;
@@ -238,15 +420,32 @@ main {
 
         .close {
             position: absolute;
-            top: 20px;
+            top: 14px;
             right: 20px;
             width: 26px;
             height: 26px;
             cursor: pointer;
         }
 
+        .details {
+            bottom: 18%;
+            display: flex;
+            justify-content: center;
+            width: 100%;
+
+            a {
+                display: inline;
+                width: 60px;
+                padding: 5px 10px;
+                border-radius: 10px;
+                margin-right: 4px;
+                text-decoration: none;
+                background-color: #0e7074;
+            }
+        }
+
         #navi_dialog {
-            top: 180px;
+            top: 78px;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -277,7 +476,6 @@ main {
 }
 
 footer {
-    position: fixed;
     bottom: 0;
     width: 100%;
     height: 100px;

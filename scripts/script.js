@@ -76,11 +76,9 @@ function renderLoadMoreButton() {
         button.className = "load-more-button";
         button.textContent = "Mehr anzeigen";
         button.onclick = renderNextPokemons;
-
         const wrapper = document.createElement("div");
         wrapper.id = "load-more-wrapper";
         wrapper.appendChild(button);
-
         const contentRef = document.getElementById("content");
         contentRef.parentNode.insertBefore(wrapper, contentRef.nextSibling);
     }
@@ -106,12 +104,6 @@ function back(i) {
         i--;
         updateDialog(i);
     }
-    document.getElementById("backbutton").onclick = function () {
-        back(i);
-    };
-    document.getElementById("forwardbutton").onclick = function () {
-        forward(i);
-    };
 }
 
 function forward(i) {
@@ -124,35 +116,28 @@ function forward(i) {
         i++;
         updateDialog(i);
     }
-
-    document.getElementById("forwardbutton").onclick = function () {
-        forward(i);
-    };
-    document.getElementById("backbutton").onclick = function () {
-        back(i);
-    };
 }
 
-function updateDialog(ind) {
-    let allPokemon = getFromLocalStorage();
-    document.getElementById("dialog-img").src =
-        "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/" +
-        allPokemon[ind].id +
-        ".png";
-    document.getElementById("photo-title").innerHTML = allPokemon[ind].name;
-    document.getElementById("position").innerHTML = "";
-    document.getElementById("position").innerHTML =
-        ind + 1 + "/" + allPokemon.length;
+function updateDialog(i) {
+    let overlayRef = document.getElementById("overlay");
+    overlayRef.innerHTML = "";
+    overlayRef.innerHTML = toggleOverlayTemplate(
+        getFromLocalStorage()[i].id,
+        getFromLocalStorage()[id - 1].type,
+        getFromLocalStorage()[i].name,
+        getFromLocalStorage().length,
+        i
+    );
 }
 
 function toggleOverlay(id) {
     let overlayRef = document.getElementById("overlay");
-    let allPokemon = getFromLocalStorage();
     overlayRef.innerHTML = "";
     overlayRef.innerHTML = toggleOverlayTemplate(
         id,
-        allPokemon[id - 1].name,
-        allPokemon.length,
+        getFromLocalStorage()[id - 1].type,
+        getFromLocalStorage()[id - 1].name,
+        getFromLocalStorage().length,
         id - 1
     );
     toggleClose();

@@ -24,7 +24,7 @@ function getRenderStatsTemplate(stats) {
     return result;
 }
 
-function toggleOverlayTemplate(id, name, menge, i) {
+function toggleOverlayTemplate(id, type, name, menge, i) {
     return `<div onclick="bubblingprotection(event)" id="dialog" class="dialog_Container flex_Container">
                 <div id="photo-title">#${id} &nbsp;&nbsp; ${name}</div>
                 <img
@@ -34,7 +34,15 @@ function toggleOverlayTemplate(id, name, menge, i) {
                     class="close"
                     class="flex_Container"
                 />
-                <img id="dialog-img" src='https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/${id}.png' />
+                <div class="${
+                    type[0].type.name
+                } photo_big"><img id="dialog-img" class="img_Dialog"src='https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/${id}.png' /></div>
+                <div class="type">${getRenderTypeTemplate(type)}</div>
+                <div id="more_Details" class="details"><nav>
+                    <a href="">Info</a>
+                    <a href="">Stats</a>
+                    <a href="">Evo Chain</a>
+                </nav></div>
                 <div id="navi_dialog"><img
                     onclick="back(${i})"
                     id="backbutton"
