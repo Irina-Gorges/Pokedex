@@ -1,9 +1,7 @@
-// let allPokemon = [];
 let displayedCount = 0;
 const PAGE_SIZE = 20;
 
 function init() {
-    //fetchDataJson("https://pokeapi.co/api/v2/pokemon?limit=40&offset=0");
     renderHtml();
 }
 
@@ -25,7 +23,7 @@ async function renderHtml() {
         const poke = await fetchDataJson(
             "https://pokeapi.co/api/v2/pokemon?limit=40&offset=0"
         );
-        getPokeResults();
+        getPokeResults(poke);
     } else {
         allPokemon = getFromLocalStorage();
     }
@@ -36,6 +34,7 @@ async function renderHtml() {
 
 function renderNextPokemons() {
     const contentRef = document.getElementById("content");
+    const allPokemon = getFromLocalStorage();
     const end = Math.min(displayedCount + PAGE_SIZE, allPokemon.length);
 
     for (let i = displayedCount; i < end; i++) {
@@ -48,7 +47,6 @@ function renderNextPokemons() {
     }
 
     displayedCount = end;
-
     // Wenn alle angezeigt sind, Button ausblenden
     if (displayedCount >= allPokemon.length) {
         document.getElementById("load-more-btn").style.display = "none";
@@ -94,25 +92,20 @@ function bubblingprotection(event) {
 }
 
 function back(i) {
-    // Wenn der Zaehler 0 ist soll wieder von hinten angefangen werden
-
     if (i == 0) {
         i = allPokemon.length - 1;
         updateDialog(i);
     } else {
-        // Wenn nicht erstes Bild dann ein Bild zurück
         i--;
         updateDialog(i);
     }
 }
 
 function forward(i) {
-    // Wenn der Zaehler das Maxmimum erreicht hat soll wieder von vorne angefangen werden
     if (i == allPokemon.length - 1) {
         i = 0;
         updateDialog(i);
     } else {
-        // Wenn nicht letztes Bild dann nächstes anzeigen
         i++;
         updateDialog(i);
     }
@@ -149,7 +142,7 @@ function toggleOverlay(id) {
     toggleClose();
 }
 
-async function getPokeResults() {
+async function getPokeResults(poke) {
     let result = [];
     for (let i = 0; i < poke.results.length; i++) {
         const res = await fetch(poke.results[i].url);

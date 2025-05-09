@@ -17,10 +17,18 @@ function getRenderTypeTemplate(type) {
 }
 
 function getRenderStatsTemplate(stats) {
-    let result = "";
-    for (i = 0; i < stats.length; i++) {
-        result += `<p>${stats[i].stat.name} ${stats[i].base_stat}</p>`;
+    let result = `<div class="stats-container">`;
+
+    for (let i = 0; i < stats.length; i++) {
+        result += `
+            <div class="stat-item">
+                <span class="stat-name">${stats[i].stat.name}:</span>
+                <span class="stat-value">${stats[i].base_stat}</span>
+            </div>
+        `;
     }
+
+    result += `</div>`;
     return result;
 }
 
@@ -63,17 +71,17 @@ function renderInfoPokeTemplate(i) {
     let myArr = getFromLocalStorage();
     let specialInfoRef = document.getElementById("specialInfo");
     specialInfoRef.innerHTML = "";
-    specialInfoRef.innerHTML = `<div><p>${myArr[i].height}</p>
-            <p>${myArr[i].weight}</p>
-            <p>${myArr[i].base_experience}</p>
+    specialInfoRef.innerHTML = `<div><p>Größe: ${myArr[i].height}</p>
+            <p>Gewicht: ${myArr[i].weight}</p>
+            <p>Basis Erfahrung: ${myArr[i].base_experience}</p>
             ${getRenderAbilitiesTemplate(myArr[i].abilities)}
             </div>`;
 }
 
 function getRenderAbilitiesTemplate(abilities) {
-    let result = "";
+    let result = "Abilities:";
     for (i = 0; i < abilities.length; i++) {
-        result += `<span>${abilities[i].ability.name} </span>`;
+        result += `<span> ${abilities[i].ability.name}, </span>`;
     }
     return result;
 }
