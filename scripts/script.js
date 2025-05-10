@@ -92,8 +92,9 @@ function bubblingprotection(event) {
 }
 
 function back(i) {
+    let myArr = getFromLocalStorage();
     if (i == 0) {
-        i = allPokemon.length - 1;
+        i = myArr.length - 1;
         updateDialog(i);
     } else {
         i--;
@@ -102,7 +103,8 @@ function back(i) {
 }
 
 function forward(i) {
-    if (i == allPokemon.length - 1) {
+    let myArr = getFromLocalStorage();
+    if (i == myArr.length - 1) {
         i = 0;
         updateDialog(i);
     } else {
@@ -113,32 +115,35 @@ function forward(i) {
 
 function updateDialog(i) {
     let overlayRef = document.getElementById("overlay");
+    let myArr = getFromLocalStorage();
+    let id = 0;
+    id = i > 0 ? id = i - 1 : id = i;
     overlayRef.innerHTML = "";
     overlayRef.innerHTML = toggleOverlayTemplate(
-        getFromLocalStorage()[i].id,
-        getFromLocalStorage()[i - 1].type,
-        getFromLocalStorage()[i].name,
-        getFromLocalStorage().length,
+        myArr[i].id,
+        myArr[id].type,
+        myArr[i].name,
+        myArr.length,
         i,
-        getFromLocalStorage()[i].stats,
-        getFromLocalStorage()[i]
+        myArr[i].stats,
+        myArr[i]
     );
     renderInfoPokeTemplate(i);
 }
 
 function toggleOverlay(id) {
     let overlayRef = document.getElementById("overlay");
+    let myArr = getFromLocalStorage();
+    id = id > 0 ? id = id - 1 : id = id;
     overlayRef.innerHTML = "";
     overlayRef.innerHTML = toggleOverlayTemplate(
-        id,
-        getFromLocalStorage()[id - 1].type,
-        getFromLocalStorage()[id - 1].name,
-        getFromLocalStorage().length,
-        id - 1,
-        getFromLocalStorage()[id].stats,
-        getFromLocalStorage()[id]
+        id + 1,
+        myArr[id].type,
+        myArr[id].name,
+        myArr.length,
+        id
     );
-    renderInfoPokeTemplate(id - 1);
+    renderInfoPokeTemplate(id);
     toggleClose();
 }
 
@@ -157,7 +162,50 @@ async function getPokeResults(poke) {
             weight: data.weight,
             base_experience: data.base_experience,
             abilities: data.abilities,
+            species: await getSpeciesResults(data.species.url)
         });
     }
     saveToLocalStorage(result);
 }
+
+async function getSpeciesResults(speciesUrl){
+    const res = await fetch(speciesUrl);
+    const data = await res.json();
+    return data.flavor_text_entries[0].flavor_text;
+}
+
+function filterPokemons() {
+    let filterWord = document.getElementById("searchInput");
+    let allPokemon = getFromLocalStorage();
+    const contentRef = document.getElementById("content");
+    if (filterWord.value != "") {
+        currentPokemons = allPokemon.filter((element) =>
+            element.name == searchFindName(element.name.match(filterWord.value))
+        );
+        document.getElementById("load-more-btn").style.display = "none";
+        contentRef.innerHTML = "";
+        contentRef.innerHTML = renderHtmlContent(currentPokemons);
+    } else {
+        alert("Bitte mach eine Eingabe!");
+    }
+}
+
+function searchFindName(element){
+    let result = element ? element.input : "";
+    return result;
+}
+
+
+function renderHtmlContent(searchArr) {
+    let result = "";
+for (let i = 0; i < searchArr.length; i++) {
+        result += getRenderHtmlTemplate(
+            searchArr[i].id,
+            searchArr[i].name,
+            searchArr[i].type,
+            searchArr[i].stats
+        );
+    }
+    return result;
+}
+
