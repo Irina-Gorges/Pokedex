@@ -93,9 +93,9 @@ function rendSpecialInfo(i) {
   specialInfoRef.innerHTML = getRenderStatsTemplate(myArr[i].stats);
 }
 
-function renderFlavorText(){
+function renderFlavorText() {
   let myArr = getFromLocalStorage();
   let specialInfoRef = document.getElementById("specialInfo");
   specialInfoRef.innerHTML = "";
-  specialInfoRef.innerHTML = myArr[i].species.replace("", " ");
+  specialInfoRef.innerHTML = myArr[i].species.replace(//g, " ");
 }
