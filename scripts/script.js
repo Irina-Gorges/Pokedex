@@ -107,7 +107,9 @@ function insertAfterContent(wrapper) {
 
 function toggleClose() {
     let overlayRef = document.getElementById("overlay");
+    let scrollRef = document.getElementById("no_Scroll");
     overlayRef.classList.toggle("d_none");
+    scrollRef.classList.toggle("no-scroll");
 }
 
 function bubblingprotection(event) {
@@ -159,7 +161,6 @@ function updateDialog(i) {
 function toggleOverlay(id) {
     let overlayRef = document.getElementById("overlay");
     let myArr = getFromLocalStorage();
-    // document.body.classList.add('no-scroll');
     id = id > 0 ? (id = id - 1) : (id = id);
     overlayRef.innerHTML = "";
     overlayRef.innerHTML = toggleOverlayTemplate(

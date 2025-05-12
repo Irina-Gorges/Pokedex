@@ -13,7 +13,7 @@ body {
     background-color: rgb(2, 47, 53);
 }
 
-body.no-scroll {
+.no-scroll {
     overflow: hidden;
 }
 
