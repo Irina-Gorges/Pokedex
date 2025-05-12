@@ -1,3 +1,5 @@
+// #region Basic, renderHtml
+
 let displayedCount = 0;
 const PAGE_SIZE = 20;
 
@@ -21,6 +23,8 @@ async function renderHtml() {
   renderNextPokemons();
   renderLoadMoreButton();
 }
+
+// #endregion
 
 async function loadFinalPoke() {
   const contentRef = document.getElementById("content");
