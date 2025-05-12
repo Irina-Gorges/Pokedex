@@ -33,14 +33,14 @@ function getRenderStatsTemplate(stats) {
 }
 
 function toggleOverlayTemplate(id, type, name, menge, i) {
-    return `<div onclick="bubblingprotection(event)" id="dialog" class="dialog_Container flex">
-                <div class="title_cont"><div id="photo-title" class="title_Name">#${id} &nbsp;&nbsp; ${name}</div>
+    return `<div onclick="bubblingprotection(event)" id="dialog" class="dialog_Container flex"><div class="content_Dialog">
+                <div class="title_cont"><div id="photo-title" class="title_Name">#${id} ${name}</div>
                 <img
                     onclick="toggleClose()"
                     src="./img/x-circle-regular-24.png"
                     alt="x-icon"
                     class="close"
-                    class="flex_Container"
+                    class="flex"
                 /></div>
                 <div class="${
                     type[0].type.name
@@ -51,19 +51,19 @@ function toggleOverlayTemplate(id, type, name, menge, i) {
                     <button onclick="rendSpecialInfo(${i})">Stats</button>
                     <button onclick="renderFlavorText(${i})">Flavor Text</button></div>
                 <div id="specialInfo"></div>
-                <div id="navi_dialog" class="navigation flex"><img
+                <div id="navi_dialog" class="navigation"><img
                     onclick="back(${i})"
                     id="backbutton"
                     src="./img/chevron-left-solid-60.png"
-                    alt=""
+                    class="navi_Back"
                 />
                 <div id="position">${i + 1}/${menge}</div>
                 <img
                     onclick="forward(${i})"
                     id="forwardbutton"
                     src="./img/chevron-right-regular-60.png"
-                    alt=""
-                /></div>
+                    class="navi_Forward"
+                /></div></div>
             </div>`;
 }
 
