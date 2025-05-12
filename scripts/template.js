@@ -71,9 +71,9 @@ function renderInfoPokeTemplate(i) {
     let myArr = getFromLocalStorage();
     let specialInfoRef = document.getElementById("specialInfo");
     specialInfoRef.innerHTML = "";
-    specialInfoRef.innerHTML = `<div><p>Größe: ${myArr[i].height}</p>
-            <p>Gewicht: ${myArr[i].weight}</p>
-            <p>Basis Erfahrung: ${myArr[i].base_experience}</p>
+    specialInfoRef.innerHTML = `<div><p>Height: ${myArr[i].height}</p>
+            <p>Weight: ${myArr[i].weight}</p>
+            <p>Basic Experience: ${myArr[i].base_experience}</p>
             ${getRenderAbilitiesTemplate(myArr[i].abilities)}
             </div>`;
 }

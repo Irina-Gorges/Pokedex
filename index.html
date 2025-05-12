@@ -1,52 +1,60 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Pokedex</title>
-    <link rel="stylesheet" href="styles/display.css">
-    <link rel="stylesheet" href="styles/style.css" />
-    <script src="scripts/template.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <style>
-      @import url("https://fonts.googleapis.com/css2?family=Syne+Mono&display=swap");
-    </style>
-    <link rel="shortcut icon" href="img/pokemon_favi.png" type="image/x-icon" />
-  </head>
-
-  <body onload="init()" class="flex">
-    <div id="loader" class="loader_Container d_none">
-      <img src="img/simple_pokeball.gif" alt="" class="loader_Spinner" />
-    </div>
-    <header>
-      <div class="logo">
-        <a href="index.html"
-          ><img class="header_logo" src="img/Pokemon_logo.png" />
-        </a>
-        <h1>Pokemon</h1>
-      </div>
-      <div class="search_Container">
-        <input
-          id="searchInput"
-          class="search"
-          type="text"
-          min="3"
-          placeholder="suchen"
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Pokedex</title>
+        <link rel="stylesheet" href="styles/display.css" />
+        <link rel="stylesheet" href="styles/style.css" />
+        <script src="scripts/template.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+        <style>
+            @import url("https://fonts.googleapis.com/css2?family=Syne+Mono&display=swap");
+        </style>
+        <link
+            rel="shortcut icon"
+            href="img/pokemon_favi.png"
+            type="image/x-icon"
         />
-        <button onclick="filterPokemons()">Senden</button>
-      </div>
-    </header>
+    </head>
 
-    <main>
-      <section class="flex">
-        <div id="content" class="content_Container"></div>
-      </section>
-    </main>
-    <div id="overlay" class="overlayhg d_none" onclick="toggleClose()"></div>
-    <footer class="flex">
-      <img src="img/DevA_Logo.webp" alt="" />
-      <p class="copyright_Text">&COPY; 2025 | Alle Rechte vorbehalten</p>
-    </footer>
-  </body>
-  <script src="scripts/script.js"></script>
+    <body onload="init()" class="flex">
+        <div id="loader" class="loader_Container d_none">
+            <img src="img/simple_pokeball.gif" alt="" class="loader_Spinner" />
+        </div>
+        <header>
+            <div class="logo">
+                <a href="index.html"
+                    ><img class="header_logo" src="img/Pokemon_logo.png" />
+                </a>
+                <h1>Pokemon</h1>
+            </div>
+            <div class="search_Container">
+                <input
+                    id="searchInput"
+                    class="search"
+                    type="text"
+                    min="3"
+                    placeholder="search"
+                />
+                <button onclick="filterPokemons()">Search</button>
+            </div>
+        </header>
+
+        <main>
+            <section class="flex">
+                <div id="content" class="content_Container"></div>
+            </section>
+        </main>
+        <div
+            id="overlay"
+            class="overlayhg d_none"
+            onclick="toggleClose()"
+        ></div>
+        <footer class="flex">
+            <img src="img/DevA_Logo.webp" alt="" />
+            <p class="copyright_Text">&COPY; 2025 | Alle Rechte vorbehalten</p>
+        </footer>
+    </body>
+    <script src="scripts/script.js"></script>
 </html>
