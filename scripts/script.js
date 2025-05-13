@@ -1,7 +1,7 @@
 // #region Basic, renderHtml
 
 let displayedCount = 0;
-const PAGE_SIZE = 20;
+const page_Size = 20;
 
 function init() {
     renderHtml();
@@ -31,7 +31,7 @@ async function loadFinalPoke() {
     contentRef.innerHTML = "";
     if (!localStorage.getItem("pokemon")) {
         const poke = await fetchDataJson(
-            "https://pokeapi.co/api/v2/pokemon?limit=40&offset=0"
+            "https://pokeapi.co/api/v2/pokemon?limit=151&offset=0"
         );
         await getPokeResults(poke);
     } else {
@@ -42,7 +42,7 @@ async function loadFinalPoke() {
 function renderNextPokemons() {
     const contentRef = document.getElementById("content");
     const allPokemon = getFromLocalStorage();
-    const end = Math.min(displayedCount + PAGE_SIZE, allPokemon.length);
+    const end = Math.min(displayedCount + page_Size, allPokemon.length);
 
     for (let i = displayedCount; i < end; i++) {
         contentRef.innerHTML += getRenderHtmlTemplate(
@@ -142,12 +142,12 @@ function forward(i) {
 function updateDialog(i) {
     let overlayRef = document.getElementById("overlay");
     let myArr = getFromLocalStorage();
-    let id = 0;
-    id = i > 0 ? (id = i - 1) : (id = i);
+    // let id = 0;
+    // id = i > 0 ? (id = i - 1) : (id = i);
     overlayRef.innerHTML = "";
     overlayRef.innerHTML = toggleOverlayTemplate(
         myArr[i].id,
-        myArr[id].type,
+        myArr[i].type,
         myArr[i].name,
         myArr.length,
         i,
@@ -161,16 +161,17 @@ function updateDialog(i) {
 function toggleOverlay(id) {
     let overlayRef = document.getElementById("overlay");
     let myArr = getFromLocalStorage();
-    id = id > 0 ? (id = id - 1) : (id = id);
+    let i = 0;
+    i = id > 0 ? (i = id - 1) : (i = id);
     overlayRef.innerHTML = "";
     overlayRef.innerHTML = toggleOverlayTemplate(
-        id + 1,
-        myArr[id].type,
-        myArr[id].name,
+        id,
+        myArr[i].type,
+        myArr[i].name,
         myArr.length,
-        id
+        i
     );
-    renderInfoPokeTemplate(id);
+    renderInfoPokeTemplate(i);
     toggleClose();
 }
 
@@ -221,7 +222,8 @@ async function getSpeciesResults(speciesUrl) {
 function filterPokemons() {
     const filterWord = document.getElementById("searchInput").value;
     const allPokemon = getFromLocalStorage();
-
+    let searchInfoRef = document.getElementById("infoSearch");
+    searchInfoRef.innerHTML = "";
     if (filterWord.length >= 3) {
         handleValidSearch(filterWord, allPokemon);
     } else {
@@ -244,10 +246,12 @@ function displayFilteredPokemons(pokemons) {
 }
 
 function handleInvalidSearch(input) {
+    let searchInfoRef = document.getElementById("infoSearch");
     if (input !== "") {
-        alert("Mindestens drei Zeichen, es sind/ist aktuell " + input.length);
+        searchInfoRef.innerHTML =
+            "Min. three characters, currently it is " + input.length;
     } else {
-        alert("Bitte mach eine Eingabe!");
+        searchInfoRef.innerHTML = "Please enter!";
     }
 }
 
