@@ -20,6 +20,8 @@ function saveToLocalStorage(pokeList) {
 async function renderHtml() {
     await loadFinalPoke();
     displayedCount = 0;
+    const backBtnRef = document.getElementById("backBtn");
+    backBtnRef.innerHTML = "";
     renderNextPokemons();
     renderLoadMoreButton();
 }
@@ -43,7 +45,6 @@ function renderNextPokemons() {
     const contentRef = document.getElementById("content");
     const allPokemon = getFromLocalStorage();
     const end = Math.min(displayedCount + page_Size, allPokemon.length);
-
     for (let i = displayedCount; i < end; i++) {
         contentRef.innerHTML += getRenderHtmlTemplate(
             allPokemon[i].id,
@@ -142,8 +143,6 @@ function forward(i) {
 function updateDialog(i) {
     let overlayRef = document.getElementById("overlay");
     let myArr = getFromLocalStorage();
-    // let id = 0;
-    // id = i > 0 ? (id = i - 1) : (id = i);
     overlayRef.innerHTML = "";
     overlayRef.innerHTML = toggleOverlayTemplate(
         myArr[i].id,
@@ -241,8 +240,11 @@ function handleValidSearch(filterWord, allPokemon) {
 
 function displayFilteredPokemons(pokemons) {
     const contentRef = document.getElementById("content");
-    document.getElementById("load-more-btn").style.display = "none";
+    const backBtnRef = document.getElementById("backBtn");
+    let loadmoreWrapperRef = document.getElementById("load-more-wrapper");
+    loadmoreWrapperRef.innerHTML = "";
     contentRef.innerHTML = renderHtmlContent(pokemons);
+    backBtnRef.innerHTML = `<button class="btn_Back" onclick="renderHtml()">Back</button>`;
 }
 
 function handleInvalidSearch(input) {
