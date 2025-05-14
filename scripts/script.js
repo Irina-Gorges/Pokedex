@@ -31,13 +31,22 @@ async function renderHtml() {
 async function loadFinalPoke() {
     const contentRef = document.getElementById("content");
     contentRef.innerHTML = "";
+    let menge = 151;
     if (!localStorage.getItem("pokemon")) {
         const poke = await fetchDataJson(
-            "https://pokeapi.co/api/v2/pokemon?limit=151&offset=0"
+            "https://pokeapi.co/api/v2/pokemon?limit=" + menge + "&offset=0"
         );
         await getPokeResults(poke);
     } else {
-        allPokemon = getFromLocalStorage();
+        let locelMenge = getFromLocalStorage();
+        if (locelMenge.length != menge) {
+            const poke = await fetchDataJson(
+                "https://pokeapi.co/api/v2/pokemon?limit=" + menge + "&offset=0"
+            );
+            await getPokeResults(poke);
+        } else {
+            allPokemon = getFromLocalStorage();
+        }
     }
 }
 
@@ -179,8 +188,8 @@ async function getPokeResults(poke) {
         hideLoader();
         await delaySpinner(2000);
         const result = [];
-        for (const p of poke.results) {
-            const pokemon = await fetchPokemonDetails(p.url);
+        for (p = 0; p < poke.results.length; p++) {
+            const pokemon = await fetchPokemonDetails(poke.results[p].url);
             result.push(pokemon);
         }
         saveToLocalStorage(result);
@@ -278,4 +287,26 @@ function renderHtmlContent(searchArr) {
 function hideLoader() {
     let loaderRef = document.getElementById("loader");
     loaderRef.classList.toggle("d_none");
+}
+
+function getRenderTypeTemplate(type) {
+    if (type.length == 2) {
+        return `<img src="img/${type[0].type.name}.webp" alt"${type[0].type.name}"><img src="img/${type[1].type.name}.webp" alt"${type[0].type.name}">`;
+    } else {
+        return `<img src="img/${type[0].type.name}.webp" alt"${type[0].type.name}">`;
+    }
+}
+
+function getRenderStatsTemplate(stats) {
+    let result = `<div class="stats-container">`;
+    for (let i = 0; i < stats.length; i++) {
+        result += `
+            <div class="stat-item">
+                <span class="stat-name">${stats[i].stat.name}:</span>
+                <span class="stat-value">${stats[i].base_stat}</span>
+            </div>
+        `;
+    }
+    result += `</div>`;
+    return result;
 }

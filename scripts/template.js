@@ -8,30 +8,6 @@ function getRenderHtmlTemplate(id, name, type) {
         </div>`;
 }
 
-function getRenderTypeTemplate(type) {
-    if (type.length == 2) {
-        return `<img src="img/${type[0].type.name}.webp" alt"${type[0].type.name}"><img src="img/${type[1].type.name}.webp" alt"${type[0].type.name}">`;
-    } else {
-        return `<img src="img/${type[0].type.name}.webp" alt"${type[0].type.name}">`;
-    }
-}
-
-function getRenderStatsTemplate(stats) {
-    let result = `<div class="stats-container">`;
-
-    for (let i = 0; i < stats.length; i++) {
-        result += `
-            <div class="stat-item">
-                <span class="stat-name">${stats[i].stat.name}:</span>
-                <span class="stat-value">${stats[i].base_stat}</span>
-            </div>
-        `;
-    }
-
-    result += `</div>`;
-    return result;
-}
-
 function toggleOverlayTemplate(id, type, name, menge, i) {
     return `<div onclick="bubblingprotection(event)" id="dialog" class="dialog_Container flex"><div class="content_Dialog">
                 <div class="title_cont"><div id="photo-title" class="title_Name">#${id} ${name}</div>
